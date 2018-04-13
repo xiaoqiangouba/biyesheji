@@ -1,0 +1,323 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ls.Room.dao.RoomMapper" >
+  <resultMap id="BaseResultMap" type="com.ls.Room.pojo.Room" >
+    <constructor >
+      <idArg column="room_id" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="number" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="floor" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="price" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="introduce" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="path" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="comments_id" jdbcType="VARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+
+  <!--order room 多表联合查询-->
+  <resultMap id="order_room" type="com.ls.Room.pojo.Room" >
+    <constructor >
+      <idArg column="room_id" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="number" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="floor" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="price" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="introduce" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="path" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="comments_id" jdbcType="VARCHAR" javaType="java.lang.String" />
+    </constructor>
+
+    <association property="order" javaType="com.ls.Order.pojo.Order">
+      <constructor >
+          <idArg column="id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+          <arg column="userName" jdbcType="VARCHAR" javaType="java.lang.String" />
+          <arg column="start_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+          <arg column="end_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+          <arg column="total_price" jdbcType="VARCHAR" javaType="java.lang.String" />
+          <arg column="roomNumber" jdbcType="VARCHAR" javaType="java.lang.String" />
+          <arg column="path" jdbcType="VARCHAR" javaType="java.lang.String" />
+          <arg column="state" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      </constructor >
+    </association>
+
+
+  </resultMap>
+
+
+
+
+
+
+
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    room_id, number, floor, price, introduce, path, comments_id
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ls.Room.pojo.RoomExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from tb_room
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from tb_room
+    where room_id = #{roomId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from tb_room
+    where room_id = #{roomId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.ls.Room.pojo.RoomExample" >
+    delete from tb_room
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.ls.Room.pojo.Room" >
+    insert into tb_room (room_id, number, floor, 
+      price, introduce, path, 
+      comments_id)
+    values (#{roomId,jdbcType=VARCHAR}, #{number,jdbcType=VARCHAR}, #{floor,jdbcType=VARCHAR}, 
+      #{price,jdbcType=VARCHAR}, #{introduce,jdbcType=VARCHAR}, #{path,jdbcType=VARCHAR}, 
+      #{commentsId,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ls.Room.pojo.Room" >
+    insert into tb_room
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="roomId != null" >
+        room_id,
+      </if>
+      <if test="number != null" >
+        number,
+      </if>
+      <if test="floor != null" >
+        floor,
+      </if>
+      <if test="price != null" >
+        price,
+      </if>
+      <if test="introduce != null" >
+        introduce,
+      </if>
+      <if test="path != null" >
+        path,
+      </if>
+      <if test="commentsId != null" >
+        comments_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="roomId != null" >
+        #{roomId,jdbcType=VARCHAR},
+      </if>
+      <if test="number != null" >
+        #{number,jdbcType=VARCHAR},
+      </if>
+      <if test="floor != null" >
+        #{floor,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null" >
+        #{price,jdbcType=VARCHAR},
+      </if>
+      <if test="introduce != null" >
+        #{introduce,jdbcType=VARCHAR},
+      </if>
+      <if test="path != null" >
+        #{path,jdbcType=VARCHAR},
+      </if>
+      <if test="commentsId != null" >
+        #{commentsId,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+
+
+  <!--
+    根据floor查房间信息
+    selectByFloor
+ -->
+  <select id="selectByFloor" resultMap="BaseResultMap" parameterType="com.ls.Room.pojo.Room" >
+    select
+    <include refid="Base_Column_List" />
+    from tb_room
+    where floor = #{floor,jdbcType=VARCHAR}
+  </select>
+
+  <!--
+  根据floor查房间信息(正序)
+  selectRoom
+    <![CDATA[xxxxxx]]>
+  -->
+  <sql id="order_room_List" >
+    a.room_id, a.number, a.floor, a.price, a.introduce, a.path, a.comments_id,b.state,b.id,
+    b.userName,b.start_time,b.end_time,b.total_price,b.roomNumber,b.path
+  </sql>
+  <select id="selectRoom" resultMap="order_room"  >
+    select
+    <include refid="order_room_List" />
+    from tb_room as a
+    left join tb_order as b on a.number = b.roomNumber
+    order by floor, a.number
+  </select>
+
+  <!--
+       根据价格查询
+      selectRoomByPrice
+  -->
+  <select id="selectRoomByPrice" resultMap="BaseResultMap" parameterType="com.ls.Room.pojo.Room" >
+    select
+    <include refid="Base_Column_List" />
+    from tb_room
+    where CONVERT(price,SIGNED)<![CDATA[ <= ]]> #{price,jdbcType=VARCHAR}
+  </select>
+
+
+  <select id="countByExample" parameterType="com.ls.Room.pojo.RoomExample" resultType="java.lang.Integer" >
+    select count(*) from tb_room
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update tb_room
+    <set >
+      <if test="record.roomId != null" >
+        room_id = #{record.roomId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.number != null" >
+        number = #{record.number,jdbcType=VARCHAR},
+      </if>
+      <if test="record.floor != null" >
+        floor = #{record.floor,jdbcType=VARCHAR},
+      </if>
+      <if test="record.price != null" >
+        price = #{record.price,jdbcType=VARCHAR},
+      </if>
+      <if test="record.introduce != null" >
+        introduce = #{record.introduce,jdbcType=VARCHAR},
+      </if>
+      <if test="record.path != null" >
+        path = #{record.path,jdbcType=VARCHAR},
+      </if>
+      <if test="record.commentsId != null" >
+        comments_id = #{record.commentsId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update tb_room
+    set room_id = #{record.roomId,jdbcType=VARCHAR},
+      number = #{record.number,jdbcType=VARCHAR},
+      floor = #{record.floor,jdbcType=VARCHAR},
+      price = #{record.price,jdbcType=VARCHAR},
+      introduce = #{record.introduce,jdbcType=VARCHAR},
+      path = #{record.path,jdbcType=VARCHAR},
+      comments_id = #{record.commentsId,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ls.Room.pojo.Room" >
+    update tb_room
+    <set >
+      <if test="number != null" >
+        number = #{number,jdbcType=VARCHAR},
+      </if>
+      <if test="floor != null" >
+        floor = #{floor,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null" >
+        price = #{price,jdbcType=VARCHAR},
+      </if>
+      <if test="introduce != null" >
+        introduce = #{introduce,jdbcType=VARCHAR},
+      </if>
+      <if test="path != null" >
+        path = #{path,jdbcType=VARCHAR},
+      </if>
+      <if test="commentsId != null" >
+        comments_id = #{commentsId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where room_id = #{roomId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ls.Room.pojo.Room" >
+    update tb_room
+    set number = #{number,jdbcType=VARCHAR},
+      floor = #{floor,jdbcType=VARCHAR},
+      price = #{price,jdbcType=VARCHAR},
+      introduce = #{introduce,jdbcType=VARCHAR},
+      path = #{path,jdbcType=VARCHAR},
+      comments_id = #{commentsId,jdbcType=VARCHAR}
+    where room_id = #{roomId,jdbcType=VARCHAR}
+  </update>
+</mapper>

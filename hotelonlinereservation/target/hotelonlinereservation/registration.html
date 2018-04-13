@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>sea View</title>
+		<link rel="stylesheet" href="css/custom/registration.css" />
+		<link rel="stylesheet" href="css/static/bootstrap.min.css"/>
+		<script type="text/javascript" src="js/jquery/jquery-2.1.4.min.js" ></script>
+		<script type="text/javascript" src="js/jquery/jquery-md5.js"></script>
+		<script type="text/javascript" src="js/static/bootstrap.js" ></script>
+		<script type="text/javascript" src="js/custom/registration.js"></script>
+	</head>
+	<body >
+	<!--
+	    时间：2017-12-21
+    	描述：导航条
+	-->
+		<nav class="navbar navbar-default  navbar-static-top" >
+		  <div class="container-fluid nav_head">
+		    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+		    	<div class="logo">
+		    	    <a href="index.html">
+		    	    	<img src="img/login/logo.png" />
+		    	    </a>
+		    	</div>
+		    	<span class="glyphicon glyphicon-pencil registration_span" aria-hidden="true"></span>
+		        <div class="registration_div">
+		        	<p>账号通行证</p>
+		        </div>
+		        <div class="registration_right">
+		        	<span class="glyphicon glyphicon-user registration_span" aria-hidden="true"></span>
+		            <a href="login.html" class="registration_a">登录</a>
+		        </div>
+		    </div>
+		  </div>
+	</nav>
+
+	<!--
+	     时间：2017-12-21
+    	描述：账号注册模块
+	-->
+	<div class="registration_zhong">
+		<div class="registration_zhong_ding">
+			<p style="margin-left:25px ;">账号注册</p>
+		</div>
+		<div class="registration_registration">
+			<form class="form-horizontal">
+				       <div class=" form_yonghuming">
+    						<div class="input-group " >
+     							<div class="input-group-addon ">
+     								<span class="glyphicon glyphicon-user" aria-hidden="true" ></span>
+     							</div>
+      							<input type="text" class="form-control"  placeholder="用户名" name="userName" id="userName" required="required">
+   						 	</div>
+						   <span class="help-block" id="user_span"></span>
+  						</div>
+  						<div class=" form_yonghuming">
+    						<div class="input-group" >
+     							<div class="input-group-addon ">
+     								<span class="glyphicon glyphicon-lock" aria-hidden="true"></span>
+     							</div>
+      							<input type="password" class="form-control"  placeholder="密码" name="passWord" id="passWord" required="required">
+   						 	</div>
+  						</div>
+  						<div class=" form_yonghuming">
+    						<div class="input-group" >
+     							<div class="input-group-addon ">
+     								<span class="glyphicon glyphicon-lock" aria-hidden="true"></span>
+     							</div>
+      							<input type="password" class="form-control"  placeholder="确认密码" name="passWord1" id="passWord1" required="required">
+   						 	</div>
+							<span class="help-block" id="password_span"></span>
+  						</div>
+  						<div class=" form_yonghuming">
+    						<div class="input-group" >
+     							<div class="input-group-addon ">
+     								<span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>
+     							</div>
+      							<input type="text" class="form-control"  placeholder="QQ邮箱" name="email" id="email" required="required">
+							</div>
+							<span class="help-block" id="email_span"></span>
+  						</div>
+  						<div class=" form_yonghuming">
+    						<div class="input-group" style="width:370px ;">
+      							<input type="text" class="form-control"  style="width: 220px;" name="yanzhengma" id="yanzhengma">
+      							<button type="button" class="btn btn-primary disabled" data-toggle="button" aria-pressed="false" autocomplete="off" style="width: 100px;float: left;height: 35px;margin-left:30px ;" id="email_but" title=''attr="false">
+								    获取验证码
+								</button>
+							</div>
+							<span class="help-block" id="yanzhenma_span"></span>
+  						</div>
+  						<div class=" form_yonghuming">
+    						<div class="input-group" style="width:100% ;">
+      							<button type="button" disabled="disabled" class="btn btn-primary disabled" data-toggle="button" aria-pressed="false" autocomplete="off" style="width:100% ;" id="add_user_but" >
+                                                                注册
+								</button>
+   						 	</div>
+							<span class="help-block" id="result"></span>
+  						</div>
+  						<div class=" form_yonghuming" style="text-align: center;">
+    						<p>使用第三方账号</p>
+  						</div>
+  						<div class="div_img">
+  							<a href="#">
+  								<img src="img/registration/qq.png" id="img_qq" />
+  							</a>
+  						</div>
+  						<div class="div_img">
+  							<a href="#">
+  								<img src="img/registration/weixin.png" id="img_weixin"/>
+  							</a>
+  						</div>
+  						<div class="div_img">
+  							<a href="#">
+  								<img src="img/registration/xinlang.png" id="img_xinlang"/>
+  							</a>
+  						</div>
+			</form>
+		</div>
+	</div>
+	
+	
+	<!--
+    	作者：陈强
+    	时间：2017-12-21
+    	描述：模态框
+    -->
+	<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		  <div class="modal-dialog" role="document">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		        <h4 class="modal-title" id="myModalLabel">提示</h4>
+		      </div>
+		           <div class="modal-body" style="height:100px ;">
+		           	    <div>
+		           	    	<span class="glyphicon glyphicon-exclamation-sign modal_span" aria-hidden="true"></span>
+			        		<h3 style="float: left;display: block;">对不起，该功能尚未开通</h3>
+		           	    </div>
+		           </div>
+				   <div class="modal-footer">
+				        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+				        <button type="button" class="btn btn-primary"  data-dismiss="modal">确定</button>
+				   </div>
+		    </div>
+	    </div>
+     </div>
+	<!--底部-->
+	<div style="width: 100%;height: 50px;margin-top: 20px;" >
+		<nav class="navbar navbar-default"  style="  background-color:#fff ;">
+			<div class="container-fluid ">
+				<div class="collapse navbar-collapse">
+					<p style="display: block;margin-left: 40%;font-size: 20px;line-height: 50px;">sea view 版权所有<span class="glyphicon glyphicon-leaf" aria-hidden="true"></span>2018</p>
+				</div>
+			</div>
+		</nav>
+	</div>
+	</body>
+</html>

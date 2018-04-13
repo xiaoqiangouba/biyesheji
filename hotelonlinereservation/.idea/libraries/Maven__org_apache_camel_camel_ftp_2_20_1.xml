@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: org.apache.camel:camel-ftp:2.20.1">
+    <CLASSES>
+      <root url="jar://E:/Maven/Maven Local Space/org/apache/camel/camel-ftp/2.20.1/camel-ftp-2.20.1.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://E:/Maven/Maven Local Space/org/apache/camel/camel-ftp/2.20.1/camel-ftp-2.20.1-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://E:/Maven/Maven Local Space/org/apache/camel/camel-ftp/2.20.1/camel-ftp-2.20.1-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

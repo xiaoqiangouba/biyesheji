@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <script src="js/jquery/jquery-2.1.4.min.js" type="text/javascript" charset="utf-8"></script>
+</head>
+
+<body>
+<form class="form-horizontal">
+    <div class="login_login_d">
+        <div class="input-group" style="width: 70%;margin-left:15% ;">
+            <div class="input-group-addon ">
+                <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+            </div>
+            <input type="text" required="required" class="form-control" id="username" placeholder="用户名">
+        </div>
+    </div>
+    <div class="login_login_d1">
+        <div style="height: 50px">
+            <div class="input-group" style="width: 70%;margin-left:15% ;">
+                <div class="input-group-addon ">
+                    <span class="glyphicon glyphicon-lock" aria-hidden="true"></span>
+                </div>
+                <input type="password" required="required" class="form-control" id="password" placeholder="密码">
+            </div>
+            <span class="help-block" id="result" style="font-size: 15px;margin-left:15% "></span>
+        </div>
+        <div class="login_login_d_d">
+            <div class="input-group" style="width: 70%;margin-left:15% ;">
+                <div class="btn-group" role="group" >
+                    <button type="button" class="btn btn-default" style="width:100px ;float: left;" id="login">登录</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+<script>
+    $("#login").click(function () {
+        var userName=$("#username").val();
+        var passWord=$("#password").val();
+        $.ajax({
+            url:"/testController/test",
+            data:{"userName":userName,"passWord":passWord},
+            dataType:"text",
+            type: "POST",
+            success:function (data) {
+                alert(data);
+            },
+            error:function () {
+                alert("error1");
+            }
+        });
+    });
+</script>
+
+
+</body>
+
+</html>

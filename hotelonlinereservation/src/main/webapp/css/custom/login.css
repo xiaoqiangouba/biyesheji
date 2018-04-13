@@ -1,0 +1,193 @@
+*{
+	margin:0;
+    padding:0;
+    list-style-type:none;
+    }
+    
+a,img{
+	border:0;
+	}
+	
+.nav_head{
+	background-color:#fff ;
+}
+.logo{
+    width: 13%;
+	height:70px ;
+	float: left;
+	margin-left:5% ;
+}
+.login_span{
+	display: block ;
+	font-size: 25px;
+	color:#C0C0C0 ;
+	float: left;
+	margin-top:20px ;
+}
+.login_div{
+	height:70px ;
+	width:150px ;
+	float: left;
+	color:#C0C0C0 ;
+	font-size: 25px;
+	text-align: center;
+	line-height: 70px;
+	
+}
+.login_right{
+	height:70px ;
+	width:100px ;
+	float:right ;
+	margin-right:200px ;
+	font-size: 25px;
+	text-align: center;
+	line-height: 65px;
+}
+.login_a{
+	color:#C0C0C0 ;
+}
+/*设置最外层大盒子*/
+#box{
+	position: relative;
+	width: 600px;
+	height: 344px;
+	border: 1px solid #C0C0C0 ;
+	float: left;
+	margin-top:2%;
+	margin-left:10%;
+	/*将图片依次排开，多余部分隐藏掉*/
+	overflow: hidden;
+}
+
+/*设置ul在右下角*/
+#list{
+	position: absolute;
+	right: 50px;
+	bottom: 20px;
+	z-index: 2;
+}
+
+#list li{
+	width: 20px;
+	height: 20px;
+//border: 1px solid white;
+	/*成行显示*/
+	float: left;
+	/*去掉黑点*/
+	list-style: none;
+	margin: 0 5px;
+	text-align: center;
+}
+
+.select span{
+	width: 20px;
+	height: 20px;
+	line-height:20px;
+
+	color: #000000;
+}
+#imgbox{
+	position: absolute;
+	height: 344px;
+	/*保证图片滑动时，没有缝隙 720*2*/
+	width: 1200px;
+	/*横行排列*/
+	float: left;
+	left: 0;
+	top: 0;
+}
+
+#imgbox img{
+	position: absolute;
+	left: 600px;
+	top: 0;
+}
+
+/*设置第一张图片*/
+#imgbox .first{
+	position: absolute;
+	left: 0;
+	top: 0;
+}
+
+/*更改指示标的背景颜色*/
+#list li:hover{
+	background: white;
+}
+
+.login_login{
+	width: 350px;
+	height:350px ;
+	border: 1px solid #C0C0C0 ;
+	float: right;
+	box-shadow:5px 0 5px #CCCCCC;
+	margin-top: 2%;
+	margin-right:10%;
+	
+}
+.login_login_p{
+	height:35px ;
+	width:100% ;
+	font-size:25px ;
+	color:#C0C0C0 ;
+	line-height:20px ;
+	margin-top:20px ;
+	line-height: 35px;
+	
+}
+.login_login_d{
+    height:35px ;
+	width:100% ;
+	font-size:18px ;
+	color:#C0C0C0 ;
+	line-height:20px ;
+	margin-top:20px ;
+}
+.login_login_d1{
+	height:50px ;
+	width:100% ;
+	font-size:18px ;
+	color:#C0C0C0 ;
+	line-height:20px ;
+	margin-top:20px ;
+}
+.login_login_d_d{
+	height:35px ;
+	width:100% ;
+	font-size:18px ;
+	color:#C0C0C0 ;
+	line-height:20px ;
+	margin-top:2%;
+}
+
+.login_login_e{
+    height:35px ;
+	width:100% ;
+	margin-top:60px ;
+		
+}
+.login_login_f{
+    height:35px ;
+	width:100% ;
+	margin-top:10px ;
+		
+}
+.login_san{
+	height:35px ;
+	width:48px ;
+	float: left;
+	margin-left: 20px;
+}
+.login_san_xin{
+	height:35px ;
+	width:60px ;
+	float: left;
+	margin-left: 20px;
+}
+.modal_span{
+	font-size: 30px;
+	display: block;
+	margin-left: 5%;
+	float: left;
+	margin-top:3% ;
+}

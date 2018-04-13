@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="css/static/bootstrap.css"/>
+    <script type="text/javascript" src="js/jquery/jquery-2.1.4.min.js"></script>
+    <script type="text/javascript" src="js/jquery/jqplot.js"></script>
+    <script type="text/javascript" src="js/jquery/jquery.cookie.js"></script>
+    <script src="js/jquery/jquery.table2excel.js"></script>
+    <script type="text/javascript" src="js/static/bootstrap.js" ></script>
+    <script type="text/javascript" src="js/custom/management.js" ></script>
+    <link rel="stylesheet" href="css/custom/management.css"/>
+    <script type="text/javascript"src="js/jquery/jquery-form.js"></script>
+
+</head>
+<body>
+        <nav class="navbar navbar-default nav_head " >
+            <div class="container-fluid">
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <div class="logo">
+                        <a href="index.html" id="a_img">
+                            <img src="img/login/logo.png" />
+                        </a>
+                    </div>
+                    <div class="form_right">
+                        <form class="navbar-form navbar-left ">
+                            <div class="form-group">
+                                <input type="text" name="price" class="form-control" placeholder="最高价格" id="selectPrice">
+                            </div>
+                            <button type="button" class="btn btn-default" id="price_but" disabled="disabled">搜索</button>
+                            <button type="button" class="btn btn-default" id="chongzhi_but" >重置</button>
+                            <p style="display: block;float: right;font-size: 18px;margin-top: 4px;" id="p_but" ></p>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <!-- 显示员工信息 -->
+        <div class="container">
+            <!-- 标题 -->
+            <div class="row" style="float: left">
+                <div class="col-md-12">
+                    <h1>sea view房间信息管理</h1>
+                </div>
+            </div>
+            <!-- 按钮 -->
+            <div class="row" style="float: left;margin-top: 2%;margin-left: 28%;">
+                <div class="col-md-4 col-md-offset-8" style="width: 300px;" >
+                    <button class="btn btn-primary" id="room_add" style="float: left;margin-left: 2px;" >新增</button>
+                    <button class="btn btn-danger" id="room_delete_all" style="float: left;margin-left: 2px;">删除</button>
+                    <button class="btn btn-primary" id="room_daochu_all" style="float: left;margin-left: 2px;" ><span class="glyphicon glyphicon-file"></span>导出</button>
+                </div>
+            </div>
+            <!-- 显示数据 -->
+            <div class="row">
+                <div class="col-md-12 table2excel">
+                    <table class="table table-hover" id="room_table" style="height: 500px;">
+                        <thead>
+                        <tr>
+                            <th>
+                                <input type="checkbox" id="check_all"/>
+                            </th>
+                            <th>房间名</th>
+                            <th>楼层</th>
+                            <th>介绍</th>
+                            <th>价钱/日</th>
+                            <th>图片</th>
+                            <th>操作</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div id="loading" style="width: 100%;height: 500px;">
+        </div>
+        <!-- 新增房间跳出框 -->
+        <div class="modal fade" id="addRoom" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel">房间添加</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form class="form-horizontal" method="post" action="" id="saveroom"  enctype="multipart/form-data">
+                            <div class="form-group">
+                                <label  class="col-sm-2 control-label">房间名</label>
+                                <div class="col-sm-10">
+                                    <input type="text" name="number" required="required" class="form-control" id="number_input" placeholder="房间名">
+                                    <span class="help-block"  id="number_span" ></span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label  class="col-sm-2 control-label">楼层</label>
+                                <div class="col-sm-10">
+                                    <input type="number"  name="floor" required="required" min="1" max="5" class="form-control" id="floor_input" placeholder="楼层">
+                                    <span class="help-block"></span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label  class="col-sm-2 control-label">介绍</label>
+                                <div class="col-sm-10">
+                                    <input type="text"  name="introduce" required="required" class="form-control" id="introduce_input" placeholder="简介">
+                                    <span class="help-block" id="introduce_span"></span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label  class="col-sm-2 control-label">价格/日</label>
+                                <div class="col-sm-10">
+                                    <input type="text"  name="price" required="required" class="form-control" id="price_input" placeholder="价格/日">
+                                    <span class="help-block"></span>
+                                </div>
+                                <span class="help-block" id="price_span"></span>
+                            </div>
+                            <div class="form-group">
+                                <label  class="col-sm-2 control-label">图片</label>
+                                <div class="col-sm-10">
+                                    <input type="file"  name="file" required="required" class="form-control" id="path_input" >
+                                    <span class="help-block" id="p1_input"></span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label  class="col-sm-2 control-label">图片预览</label>
+                                <div class="col-sm-10">
+                                    <img src="img/mangement/img.jpg"  id="img_input" width="110px" height="130px">
+                                    <span class="help-block" id="p_input"></span>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                        <input type="button" class="btn btn-primary" id="save_room_but" value="提交" disabled="disabled" onclick="ajaxSubmitForm();"></input>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- 显示分页信息 -->
+        <div class="row">
+            <!-- 报表-->
+            <div class="col-md-11" id="baobiao" style="margin-left:5%;height: 300px;">
+
+            </div>
+            <!-- 分页信息 -->
+            <div class="col-md-3" id="page_info"  style="margin-top:25px;font-size: 20px;margin-left: 10%;float: left;">
+
+            </div>
+            <!-- 分页条 -->
+            <div class="col-md-6" id="page_nav" style="float: left;">
+
+            </div>
+
+        </div>
+
+        <!-- 修改房间跳出框 -->
+        <div class="modal fade" id="updateRoom" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" >房间修改</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form class="form-horizontal" id="update_form" enctype="multipart/form-data" method="post" action="">
+                            <div class="form-group">
+                                <label  class="col-sm-2 control-label">房间姓名</label>
+                                <div class="col-sm-10">
+                                    <p class="form-control-static" id="number_update"></p>
+                                    <span class="help-block"></span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label  class="col-sm-2 control-label">楼层</label>
+                                <div class="col-sm-10">
+                                    <input type="number"  name="floor" required="required" min="1" max="5" class="form-control" id="floor_update" placeholder="楼层">
+                                    <span class="help-block"></span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label  class="col-sm-2 control-label">介绍</label>
+                                <div class="col-sm-10">
+                                    <input type="text"  name="introduce" required="required" class="form-control" id="introduce_update" placeholder="简介">
+                                    <span class="help-block" id="span_update"></span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label  class="col-sm-2 control-label">价格/日</label>
+                                <div class="col-sm-10">
+                                    <input type="text"  name="price" required="required" class="form-control" id="price_update" placeholder="价格/日">
+                                    <span class="help-block"></span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label  class="col-sm-2 control-label">图片</label>
+                                <div class="col-sm-10">
+                                    <input type="file"  name="file" required="required" class="form-control" id="path_update" >
+                                    <span class="help-block" id="span1_update"></span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label  class="col-sm-2 control-label">图片预览</label>
+                                <div class="col-sm-10">
+                                    <img src=""  id="img_update" width="110px" height="130px">
+                                    <span class="help-block" id="p_update"></span>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                        <button type="button" class="btn btn-primary" id="update_room_but"  onclick="updateSubmitForm();">更新</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--底部-->
+        <div style="width: 100%;height: 50px;" >
+            <nav class="navbar navbar-default" style="  background-color:#fff ;" >
+                <div class="container-fluid ">
+                    <div class="collapse navbar-collapse">
+                        <p style="display: block;margin-left: 40%;font-size: 20px;line-height: 50px;">sea view 版权所有<span class="glyphicon glyphicon-leaf" aria-hidden="true"></span>2018</p>
+                    </div>
+                </div>
+            </nav>
+        </div>
+</body>
+
+<script>
+    //保存房间
+    function ajaxSubmitForm() {
+        var option={
+            url:"/hotelonlinereservation/RoomController/saveRoom",
+            type:"POST",
+            dataType:"text",
+            headers : {"ClientCallMode" : "ajax"},
+            success:function (data) {
+                if(data=="file-error"){
+                    $("#path_input").parent().addClass("has-error");
+                    $("#p1_input").text("请选择图片");
+                    $("#p1_input").css("color","red");
+                }else if(data=="success"){
+                    $("#save_room_but").attr("disabled","disabled");
+                    $("#p_input").text("保存成功");
+                    $("#p_input").css("color","green");
+                }else if(data=="ftp--error"){
+                    alert("ftp未开启");
+                }else if(data=="file-geshi"){
+                    $("#path_input").parent().addClass("has-error");
+                    $("#p1_input").text("文件格式不正确");
+                    $("#p1_input").css("color","red");
+                }
+
+                return;
+            },
+            error:function () {
+
+                alert("联系管理员");
+            },
+        };
+        $("#saveroom").ajaxSubmit(option);
+        return false; //最好返回false，因为如果按钮类型是submit,则表单自己又会提交一次;返回false阻止表单再次提交
+    }
+
+    //更新房间update_form
+    function updateSubmitForm() {
+        var id=$("#update_room_but").attr("room-id");
+        var  number=$("#number_update").text();
+        var option={
+            url:"/hotelonlinereservation/ManagementController/updateRoom/"+id+"/"+number,
+            type:"POST",
+            dataType:"text",
+            headers : {"ClientCallMode" : "ajax"},
+            success:function (data) {
+                if(data=="success"){
+                    $("#update_room_but").attr("disabled","disabled");
+                    $("#p_update").text("更新成功");
+                    $("#p_update").css("color","green");
+                    return;
+                }else if(data=="file-error"){
+                    $("#path_update").parent().addClass("has-error");
+                    $("#span1_update").text("请选择图片");
+                    $("#span1_update").css("color","red");
+                }else if(data=="ftp--error"){
+                    alert("ftp未开启");
+                }else if(data=="file-geshi"){
+                    $("#path_input").parent().addClass("has-error");
+                    $("#p1_input").text("文件格式不正确");
+                    $("#p1_input").css("color","red");
+                }
+               return;
+            },
+            error:function () {
+                alert("联系管理员");
+            },
+        };
+        $("#update_form").ajaxSubmit(option);
+        return false; //最好返回false，因为如果按钮类型是submit,则表单自己又会提交一次;返回false阻止表单再次提交
+    }
+</script>
+</html>

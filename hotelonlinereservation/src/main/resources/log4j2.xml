@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="off">
+
+	<properties>
+        <property name="LOG_HOME">E:/logs/blade</property>
+        <property name="FILE_PRE">blade</property>
+        <!--<property name="API_FILE_PRE">api</property>
+        <property name="CIM_FILE_PRE">cim</property>-->
+        <property name="PATTERN">%d{yyyy-MM-dd HH:mm:ss.SSS} %level{lowerCase=true} [%t] [%-8c{1}:%L] - %m%n</property>
+    </properties>
+
+    <Appenders>
+    
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout pattern="%date{yyyy-MM-dd HH:mm:ss.SSS} [%file] [%thread] %n%level : %msg%n" />
+        </Console>
+
+        
+        <RollingFile name="commonFile" fileName="${LOG_HOME}/${FILE_PRE}.log"
+                     filePattern="${LOG_HOME}/%d{yyyy-MM}/${FILE_PRE}-%d{yyyy-MM-dd}-%i.log">
+            <PatternLayout pattern="%d{yyyy-MM-dd 'at' HH:mm:ss z} %-5level %class{36} %L %M - %msg%xEx%n"/>
+            <SizeBasedTriggeringPolicy size="1024MB"/>
+        </RollingFile>
+        
+        <RollingFile name="apiFile" fileName="${LOG_HOME}/${API_FILE_PRE}.log"
+                     filePattern="${LOG_HOME}/%d{yyyy-MM}/${API_FILE_PRE}-%d{yyyy-MM-dd}-%i.log">
+            <PatternLayout pattern="%d{yyyy-MM-dd 'at' HH:mm:ss z} %-5level %class{36} %L %M - %msg%xEx%n"/>
+            <SizeBasedTriggeringPolicy size="1024MB"/>
+        </RollingFile>
+        
+         <RollingFile name="cimFile" fileName="${LOG_HOME}/${CIM_FILE_PRE}.log"
+                     filePattern="${LOG_HOME}/%d{yyyy-MM}/${CIM_FILE_PRE}-%d{yyyy-MM-dd}-%i.log">
+            <PatternLayout pattern="%d{yyyy-MM-dd 'at' HH:mm:ss z} %-5level %class{36} %L %M - %msg%xEx%n"/>
+            <SizeBasedTriggeringPolicy size="1024MB"/>
+        </RollingFile>
+
+    </Appenders>
+    <Loggers>
+        
+        <!-- 减少部分debug日志
+        <logger name="druid.sql" level="INFO"/>
+        <logger name="net.sf.ehcache" level="INFO"/>
+        <logger name="org.apache.shiro" level="INFO"/>
+        <logger name="org.mybatis.spring" level="INFO"/>
+        <logger name="org.springframework" level="INFO"/>
+        <logger name="org.springblade.core.shiro.redis" level="INFO"/> -->
+        
+        <!-- 业务debug日志 
+        <logger name="org.springblade" level="DEBUG"/>
+        
+        <Root level="debug">
+            <AppenderRef ref="Console" />
+        </Root>-->
+        
+        <Root level="debug">
+            <AppenderRef ref="commonFile" />
+             <AppenderRef ref="Console" />
+        </Root>
+        
+         <logger name="com.ls" level="debug" additivity="false">
+              <AppenderRef ref="commonFile" />
+              <AppenderRef ref="Console" />
+        </logger>
+        
+        <!--<logger name="org.springblade.core.plugins.dao" level="debug" additivity="false">
+              <AppenderRef ref="commonFile" />
+              <AppenderRef ref="Console" />
+        </logger>-->
+        
+        <!--<logger name="com.ls" level="debug" additivity="false">
+              <AppenderRef ref="apiFile" />
+              <AppenderRef ref="Console" />
+              <AppenderRef ref="commonFile" />
+        </logger>-->
+        
+        <!--<logger name="org.springblade.modules.cim.handler" level="debug" additivity="false">
+              <AppenderRef ref="cimFile" />
+              <AppenderRef ref="Console" />
+              <AppenderRef ref="commonFile" />
+        </logger>-->
+
+    </Loggers>
+</Configuration>

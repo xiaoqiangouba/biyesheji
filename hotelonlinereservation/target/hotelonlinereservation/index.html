@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>sea View</title>
+		<link rel="stylesheet" href="css/static/bootstrap.css"/>
+	<!--	<link rel="stylesheet" href="css/static/Mint-ui.css" />-->
+		<link rel="stylesheet" href="/index.css">
+		<!-- Polyfills -->
+		<script src="https://as.alipayobjects.com/g/component/??console-polyfill/0.2.2/index.js,es5-shim/4.1.14/es5-shim.min.js,es5-shim/4.1.14/es5-sham.min.js,html5shiv/3.7.2/html5shiv.min.js,media-match/2.0.2/media.match.min.js"></script>
+		<link rel="stylesheet" href="css/custom/index.css" />
+		<script type="text/javascript" src="js/jquery/jquery-2.1.4.min.js"></script>
+		<script type="text/javascript" src="js/jquery/jquery.cookie.js"></script>
+		<script type="text/javascript" src="js/static/bootstrap.js" ></script>
+		<!--<script type="text/javascript" src="js/jquery/Mint-ui.js"></script>-->
+		<script type="text/javascript" src="js/jquery/jquery.flexslider-min.js"></script>
+		<script type="text/javascript" src="js/jquery/move-top.js"></script>
+		<script type="text/javascript" src="js/jquery/easing.js"></script>
+		<script type="text/javascript"src="js/custom/index.js"></script>
+	</head>
+	<body>
+		
+	<nav class="navbar navbar-default nav_head navbar-fixed-top" >
+	  <div class="container-fluid">
+	    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+	    	<div class="logo">
+	    	    <a href="index.html" id="a_img">
+	    	    	<img src="img/login/logo.png" />
+	    	    </a>
+	    	</div>
+	        <ul class="nav navbar-nav nav_ul">
+	            <li><a href="index.html" id="a_index">首页</a></li>
+	            <li><a href="management.html" id="a_fangjian">房间信息</a></li>
+	            <li><a href="comments.html" id="a_pinglun">评论订房</a></li>
+	        </ul>
+
+	        <ul class="nav navbar-nav nav_rgiht">
+	            <li ><a href="login.html">登录</a></li>
+	            <li ><a href="registration.html" id="registration">注册</a></li>
+	        </ul>
+			<div style="float: right;">
+				<li style="float: left;margin-top: 20px">
+					<p id="p_login" style="font-family:'微软雅黑';"></p>
+				</li>
+				<li style="float: right;margin-top: 15px">
+					<button type="button" class="btn btn-primary " id="tuichu" data-toggle="button" aria-pressed="false" autocomplete="off" style="color:rgba(0, 0, 0, 0.53) ;display:none;background: #fff;border: none;font-size: 20px;color: #000"  >
+						退出
+					</button>
+				</li>
+			</div>
+	    </div>
+	  </div>
+	</nav>
+
+	<div class="flexslider">
+		<ul class="slides">
+			<li style="background:url(img/index/img1.jpg) 50% 0 no-repeat;"></li>
+			<li style="background:url(img/index/img2.jpg) no-repeat 50% 0 ;"></li>
+			<li style="background:url(img/index/img3.jpg) 50% 0 no-repeat;"></li>
+			<li style="background:url(img/index/img4.jpg) 50% 0 no-repeat;"></li>
+			<li style="background:url(img/index/img5.jpg) 50% 0 no-repeat;"></li>
+		</ul>
+    </div>
+	<div class="div_fang">
+		<div style="float: left;margin-top: 2%;margin-left: 2%">
+			<p style="font-size: 20px;">今日推荐房间</p>
+		</div>
+		<div style="float: left;margin-top: 1%;margin-left: 55%;">
+			<ul class="nav navbar-nav navbar-right">
+				<li><a href="javascript:void(0);" id="li-1" style="color: #3c3c3c"><span >一楼</span></a></li>
+				<li><a href="javascript:void(0);" id="li-2" style="color: #3c3c3c"><span ></span>二楼</a></li>
+				<li><a href="javascript:void(0);" id="li-3" style="color: #3c3c3c"><span ></span>三楼 </a></li>
+				<li><a href="javascript:void(0);" id="li-4" style="color: #3c3c3c"><span ></span>四楼</a></li>
+				<li><a href="javascript:void(0);" id="li-5" style="color: #3c3c3c"><span ></span>五楼</a></li>
+			</ul>
+		</div>
+
+		<div style="margin-top: 15px;width: 100%;height: 280px;float: left;display: block;" id="div-1">
+			<div id="loading" style="width: 100%;height: 280px;">
+				<p style="display: block;font-size: 25px;margin-top: 100px;margin-left: 48%;">
+					<svg >
+						<path fill="#0000FF" d="M73,50c0-12.7-10.3-23-23-23S27,37.3,27,50 M30.9,50c0-10.5,8.5-19.1,19.1-19.1S69.1,39.5,69.1,50">
+							<animateTransform
+									attributeName="transform"
+									attributeType="XML"
+									type="rotate"
+									dur="1s"
+									from="0 50 50"
+									to="360 50 50"
+									repeatCount="indefinite" />
+						</path>
+					</svg>
+				</p>
+			</div>
+		</div>
+		<div style="margin-top: 15px;width: 100%;height: 280px;float: left;display: none;" id="div-2">
+			<div  style="width: 100%;height: 280px;"><p style="display: block;font-size: 25px;margin-top: 100px;margin-left: 48%;">
+				<svg >
+					<path fill="#0000FF" d="M73,50c0-12.7-10.3-23-23-23S27,37.3,27,50 M30.9,50c0-10.5,8.5-19.1,19.1-19.1S69.1,39.5,69.1,50">
+						<animateTransform
+								attributeName="transform"
+								attributeType="XML"
+								type="rotate"
+								dur="1s"
+								from="0 50 50"
+								to="360 50 50"
+								repeatCount="indefinite" />
+					</path>
+				</svg>
+			</p></div>
+		</div>
+		<div style="margin-top: 15px;width: 100%;height: 280px;float: left;display: none;" id="div-3">
+			<div  style="width: 100%;height: 280px;">
+				<p style="display: block;font-size: 25px;margin-top: 100px;margin-left: 48%;">
+					<svg >
+						<path fill="#0000FF" d="M73,50c0-12.7-10.3-23-23-23S27,37.3,27,50 M30.9,50c0-10.5,8.5-19.1,19.1-19.1S69.1,39.5,69.1,50">
+							<animateTransform
+									attributeName="transform"
+									attributeType="XML"
+									type="rotate"
+									dur="1s"
+									from="0 50 50"
+									to="360 50 50"
+									repeatCount="indefinite" />
+						</path>
+					</svg>
+				</p>
+			</div>
+		</div>
+		<div style="margin-top: 15px;width: 100%;height: 280px;float: left;display: none;" id="div-4">
+			<div  style="width: 100%;height: 280px;">
+				<p style="display: block;font-size: 25px;margin-top: 100px;margin-left: 48%;">
+					<svg >
+						<path fill="#0000FF" d="M73,50c0-12.7-10.3-23-23-23S27,37.3,27,50 M30.9,50c0-10.5,8.5-19.1,19.1-19.1S69.1,39.5,69.1,50">
+							<animateTransform
+									attributeName="transform"
+									attributeType="XML"
+									type="rotate"
+									dur="1s"
+									from="0 50 50"
+									to="360 50 50"
+									repeatCount="indefinite" />
+						</path>
+					</svg>
+				</p>
+			</div>
+		</div>
+		<div style="margin-top: 15px;width: 100%;height: 280px;float: left;display: none;" id="div-5">
+			<div style="width: 100%;height: 280px;">
+				<p style="display: block;font-size: 25px;margin-top: 100px;margin-left: 48%;">
+					<svg >
+						<path fill="#0000FF" d="M73,50c0-12.7-10.3-23-23-23S27,37.3,27,50 M30.9,50c0-10.5,8.5-19.1,19.1-19.1S69.1,39.5,69.1,50">
+							<animateTransform
+									attributeName="transform"
+									attributeType="XML"
+									type="rotate"
+									dur="1s"
+									from="0 50 50"
+									to="360 50 50"
+									repeatCount="indefinite" />
+						</path>
+					</svg>
+				</p>
+			</div>
+		</div>
+
+		<!-- 显示分页信息 -->
+		<div class="row">
+			<!-- 分页信息 -->
+			<div class="col-md-3" id="page_info" style="margin-top:25px;font-size: 20px;margin-left: 10%;float: left;">
+			</div>
+			<!-- 分页条 -->
+			<div class="col-md-6" id="page_nav" style="float: left;">
+
+			</div>
+		</div>
+	</div>
+
+    	<div class="div_zhong">
+    		<div class="container">
+				<div class="div_div_zhong">
+	    			<div class="col-md-3 bottom-gd wow fadeInRight animated" data-wow-delay=".5s">
+						<div class="item item-type-double">
+							<div class="item-hover">
+								<div class="item-info">
+									<div class="date">撒大苏打撒旦大苏打大苏打上</div>			
+									<div class="line"></div>			
+									<div class="headline">Doloremque laudantium</div>
+									<div class="line"></div>
+								</div>
+								<div class="mask"></div>
+							</div>
+							<div class="item-img"><img class="img-responsive" src="img/index/c1.jpg" alt=" " /></div>
+						</div>
+					</div>
+	    		</div>
+	    		<div class="div_div_zhong_zhong">
+	    			<div class="col-md-5 content-left wow fadeInRight animated" data-wow-delay=".5s">
+						<ul id="sti-menu" class="sti-menu">
+							<li data-hovercolor="#fff">
+								<a href="comments.html" id="a_ping_img">
+									<h4 data-type="mText" class="sti-item">精彩评论 </h4>
+									<p data-type="sText" class="sti-item">看好评论才能选好住处</p>
+									<span data-type="icon" class="sti-icon glyphicon glyphicon-pencil sti-item"></span>
+								</a>
+							</li>
+						</ul>
+						<script type="text/javascript" src="js/jquery/jquery.iconmenu.js"></script>
+						<script type="text/javascript">
+								$(function() {
+									$('#sti-menu').iconmenu({
+										animMouseenter	: {
+											'mText' : {speed : 400, easing : 'easeOutExpo', delay : 140, dir : 1},
+											'sText' : {speed : 400, easing : 'easeOutExpo', delay : 0, dir : 1},
+											'icon'  : {speed : 800, easing : 'easeOutBounce', delay : 280, dir : 1}
+										},
+										animMouseleave	: {
+											'mText' : {speed : 400, easing : 'easeInExpo', delay : 140, dir : 1},
+											'sText' : {speed : 400, easing : 'easeInExpo', delay : 280, dir : 1},
+											'icon'  : {speed : 400, easing : 'easeInExpo', delay : 0, dir : 1}
+										}
+									});
+								});
+						</script>
+					</div>
+	    		</div>
+	    		<div class="div_div_zhong_right">
+	    			<div class="col-md-3 bottom-gd wow fadeInRight animated" data-wow-delay=".5s">
+						<div class="item item-type-double">
+							<div class="item-hover">
+								<div class="item-info">
+									<div class="date">房间信息</div>
+									<div class="line"></div>			
+									<div class="headline">Doloremque laudantium</div>
+									<div class="line"></div>
+								</div>
+								<div class="mask"></div>
+							</div>
+							<div class="item-img"><img class="img-responsive" src="img/index/c2.jpg" alt=" " /></div>
+						</div>
+					</div>
+	    		</div>
+	    		<div class="div_xia">
+	    			<div class="col-md-5 content-left wow fadeInRight animated" data-wow-delay=".5s">
+						<ul id="sti1-menu" class="sti-menu">
+							<li data-hovercolor="#fff">
+								<a href="management.html" id="a_href">
+									<h4 data-type="mText" class="sti-item">房间信息</h4>
+									<p data-type="sText" class="sti-item">想订房--房间信息详情</p>
+									<span data-type="icon" class="sti-icon glyphicon glyphicon-map-marker sti-item"></span>
+								</a>
+							</li>
+						</ul>
+						<script type="text/javascript">
+								$(function() {
+									$('#sti1-menu').iconmenu({
+										animMouseenter	: {
+											'mText' : {speed : 400, easing : 'easeOutExpo', delay : 140, dir : 1},
+											'sText' : {speed : 400, easing : 'easeOutExpo', delay : 0, dir : 1},
+											'icon'  : {speed : 800, easing : 'easeOutBounce', delay : 280, dir : 1}
+										},
+										animMouseleave	: {
+											'mText' : {speed : 400, easing : 'easeInExpo', delay : 140, dir : 1},
+											'sText' : {speed : 400, easing : 'easeInExpo', delay : 280, dir : 1},
+											'icon'  : {speed : 400, easing : 'easeInExpo', delay : 0, dir : 1}
+										}
+									});
+								});
+						</script>
+					</div>
+	    		</div>
+
+				<div class="div_right">
+					<div class="col-md-7 content-right wow fadeInLeft animated " data-wow-delay=".5s">
+						<div class="wrapper1">
+							<div class="link" href="#"></div>
+							<div class="overlay">
+								<div class="arrow-left"></div>
+								<div class="rectangle"></div>
+							</div>
+							<div class="description">
+								<h3>无建筑、装修、噪声污染，室内环境符合人体健康要求</h3>
+								<p>你还在犹豫什么，快出发吧，提前做好准备，会给你带来很多方便哦，出门在外，住房要靠谱。赶快预定吧。</p>
+							</div>
+							<img class="img-responsive" src="img/index/c1.jpg" alt=" " width="100%" height="100%"/>
+						</div>
+					</div>
+				</div>
+    		</div>
+
+    	</div>
+    </div>
+
+	<!--底部-->
+	<div style="width: 100%;height: 50px;margin-top: 20px;" >
+		<nav class="navbar navbar-default"  style="  background-color:#fff ;">
+			<div class="container-fluid " >
+				<div class="collapse navbar-collapse">
+					<p style="display: block;margin-left: 40%;font-size: 20px;line-height: 50px;">sea view 版权所有<span class="glyphicon glyphicon-leaf" aria-hidden="true"></span>2018</p>
+				</div>
+			</div>
+		</nav>
+	</div>
+
+        
+<script type="text/javascript">
+	$(document).ready(function(){
+		$('.flexslider').flexslider({
+		
+			pauseOnAction: false
+		});
+	});
+</script>
+	</body>
+</html>
