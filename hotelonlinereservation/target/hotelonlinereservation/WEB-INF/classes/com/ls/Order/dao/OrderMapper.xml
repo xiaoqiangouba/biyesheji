@@ -98,6 +98,14 @@
     where  userName = #{username,jdbcType=VARCHAR}
   </select>
 
+  <!--根据房间号查询状态selectOrderByNmuber-->
+  <select id="selectOrderByNmuber" resultMap="BaseResultMap" parameterType="com.ls.Order.pojo.Order">
+    select
+    <include refid="Base_Column_List" />
+    from tb_order
+    where  roomnumber = #{roomnumber,jdbcType=VARCHAR}
+  </select>
+
   <!-- 查看统计 selectRopment-->
   <sql id="selectRopment_Column_List" >
      id,userName, start_time,end_time, max(total_price) as total_price ,roomNumber, path, state

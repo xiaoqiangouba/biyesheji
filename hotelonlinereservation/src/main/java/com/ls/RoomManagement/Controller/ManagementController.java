@@ -2,7 +2,10 @@ package com.ls.RoomManagement.Controller;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.ls.Order.dao.OrderMapper;
+import com.ls.Order.pojo.Order;
 import com.ls.Room.Controller.UpdateFtpController;
+import com.ls.Room.dao.RoomMapper;
 import com.ls.Room.pojo.Room;
 import com.ls.RoomManagement.Service.Impl.MangementServiceImpl;
 import com.ls.RoomManagement.dao.JesisDao;
@@ -31,6 +34,10 @@ import java.util.List;
 @Controller
 @RequestMapping("/ManagementController")
 public class ManagementController{
+    @Autowired
+    private RoomMapper roomMapper;
+    @Autowired
+    OrderMapper orderMapper;
     private static final JedisPool POOL = null;
     /**
      * 查询所有信息(楼层升序)
@@ -124,13 +131,33 @@ public class ManagementController{
         //将多个id分割成id数组
           if(roomIds.contains("-")){
               String[] str_ids= roomIds.split("-");
+              //计数器
+              int cuut=0;
               //便利每一个id
               for(String ids :str_ids){
-                  del_ids.add(ids);
+                  Room room= roomMapper.selectByPrimaryKey(ids);
+                  Order order= orderMapper.selectOrderByNmuber(room.getNumber());
+                  if(order==null){
+                      cuut+=1;
+                  }else{
+                      return Msg.fail();
+                  }
               }
-              mangementService.deleteAll(del_ids);
+              if(cuut==str_ids.length){
+                  for(String ids :str_ids){
+                      del_ids.add(ids);
+                      mangementService.deleteAll(del_ids);
+                  }
+              }
+
           }else{
-              mangementService.deleteRoomById(roomIds);
+              Room room= roomMapper.selectByPrimaryKey(roomIds);
+              Order order= orderMapper.selectOrderByNmuber(room.getNumber());
+              if(order==null){
+                  mangementService.deleteRoomById(roomIds);
+              }else{
+                  return Msg.fail();
+              }
           }
         return Msg.success();
     }

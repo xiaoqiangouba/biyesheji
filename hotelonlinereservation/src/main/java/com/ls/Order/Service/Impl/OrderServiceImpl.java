@@ -126,4 +126,14 @@ public class OrderServiceImpl implements OrderService{
 
         return orderMapper.selectOne(username);
     }
+
+    /**
+     * 根据房间号查询状态
+     * @param number
+     * @return
+     */
+    public Order selectOrderByNmuber(String number) {
+        return   orderMapper.selectOrderByNmuber(number);
+    }
+
 }

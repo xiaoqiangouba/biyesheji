@@ -96,7 +96,7 @@ window.onload = function(){
              }
           },
           error:function () {
-                alert("error");
+              layer_alert('获取错误', "error");
           },
         });
     });
@@ -152,7 +152,7 @@ window.onload = function(){
 
         });
         if(!$.trim(number)){
-            alert("请勾选删除的房间信息");
+            layer_alert('请选择删除的房间', "warn");
         }else{
             //去除多余的逗号
             number=number.substring(0, number.length-1);
@@ -165,12 +165,17 @@ window.onload = function(){
                     type:"DELETE",
                     dataType:"json",
                     success:function(result){
-                        alert(result.msg);
-                        //回到当前页面
-                        selectRoom(id,currentPage,sta);
+                        if(result.msg=="处理失败"){
+                            layer_alert(number+'其中某个房间已被预订无法批量删除', "warn");
+                        }else{
+                            layer_alert('房间删除成功', "success");
+                            //回到当前页面
+                            selectRoom(id,currentPage,sta);
+                        }
+
                     },
                     error:function () {
-                        alert("删除失败");
+                        layer_alert('删除失败联系管理员', "error");
                     }
                 });
             }
@@ -262,26 +267,22 @@ window.onload = function(){
                 type:"DELETE",
                 dataType:"json",
                 success:function (data) {
-                    alert(data.msg);
-                    //回到当前页面
-                    selectRoom(id,currentPage,sta);
+                    if(data.msg=="处理失败"){
+                        layer_alert('此房间已被预订无法删除', "warn");
+                    }else{
+                        layer_alert('房间删除成功', "success");
+                        //回到当前页面
+                        selectRoom(id,currentPage,sta);
+                    }
                 },
                 error:function () {
-                    alert("删除错误");
+                    layer_alert('删除失败联系管理员', "error");
                 }
             });
         }
 
     });
 
-  /*   //点击图片
-    $("#a_img").click(function () {
-        if(data != "undefined"){
-            window.location.href="index.html?"+data;
-        }else{
-            window.location.href="index.html";
-        }
-    });*/
 
     //悬浮事件
     $("#room_table").on("mouseover mouseout","img",function(event){
@@ -323,7 +324,7 @@ window.onload = function(){
                 baobiaoByPic(room);
             },
             error:function () {
-                alert("查询错误");
+                layer_alert('查询错误联系管理员', "error");
             }
         });
     }
@@ -416,7 +417,7 @@ window.onload = function(){
                 $("#img_update").attr("src",room.path);
             },
             error:function () {
-                alert("获取失败");
+                layer_alert('获取失败', "error");
             },
         });
     }
@@ -466,7 +467,7 @@ window.onload = function(){
             },
             error:function () {
                 $("#loading").css("display","none");
-                alert("获取错误");
+                layer_alert('获取错误', "error");
             },
 
         });
@@ -520,7 +521,6 @@ window.onload = function(){
                 var user = data.extend.list;
                 $.each(user, function (index, item) {
                     sta=user.sta;
-                    // alert(user.sta);
                     if(user.sta==1){
                         $("#room_add").text("");
                         $("#room_delete_all").text("");
@@ -545,7 +545,7 @@ window.onload = function(){
                 selectRoom(id,1,sta);
             },
             error: function () {
-                alert("服务器异常");
+                layer_alert('服务器异常', "error");
             },
         });
     }
@@ -758,7 +758,71 @@ window.onload = function(){
         currentPage=data.extend.pageInfo.pageNum;*/
     }
 
+    /**                  弹出层                                  **/
 
+    function layer_alert(msg, type) {
+        if (type == "success") {
+            layer.alert(msg, {
+                icon : 1
+            });
+            return;
+        }
+        if (type == "error") {
+            layer.alert(msg, {
+                icon : 2
+            });
+            return;
+        }
+        if (type == "ask") {
+            layer.alert(msg, {
+                icon : 3
+            });
+            return;
+        }
+        if (type == "warn") {
+            layer.alert(msg, {
+                icon : 7
+            });
+            return;
+        }
+    }
+
+    function layer_post(data) {
+        if (data.code === 0) {
+            layer.alert(data.message, {
+                icon : 1
+            });
+            return;
+        }
+        if (data.code === 1 || data.code === 999) {
+            layer.alert(data.message, {
+                icon : 2
+            });
+            return;
+        }
+        if (data.code === 2) {
+            layer.alert(data.message, {
+                icon : 7
+            });
+            return;
+        }
+        if (data.code === 3) {
+            layer.alert(data.message, {
+                icon : 7
+            });
+            return;
+        }
+    }
+
+    function appLoading() {
+        return layer.load(1, {
+            shade : false
+        });
+    }
+
+    function clearLoading(index) {
+        layer.close(index);
+    }
 
 
 

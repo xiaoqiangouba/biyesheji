@@ -59,30 +59,22 @@ window.onload = function(){
     //点击QQ
     $("#login_qq").click(function(){
         //弹出模态框
-        $("#exampleModal").modal({
-            backdrop:"static"
-        });
+        layer_alert('该功能尚未开通', "warn");
     });
     //点击微博
     $("#login_wei").click(function(){
         //弹出模态框
-        $("#exampleModal").modal({
-            backdrop:"static"
-        });
+        layer_alert('该功能尚未开通', "warn");
     });
     //点击git
     $("#login_git").click(function(){
         //弹出模态框
-        $("#exampleModal").modal({
-            backdrop:"static"
-        });
+        layer_alert('该功能尚未开通', "warn");
     });
     //点击人人
     $("#login_ren").click(function(){
         //弹出模态框
-        $("#exampleModal").modal({
-            backdrop:"static"
-        });
+        layer_alert('该功能尚未开通', "warn");
     });
 
     //用户登录
@@ -110,7 +102,7 @@ window.onload = function(){
                        $.cookie('id',data.extend.id,{ expires: 7, path: '/',});
                         window.location.href="index.html";
                     }else{
-                        alert("请您打开浏览器cookies");
+                        layer_alert('请您打开游览器的cookie', "error");
                     }
 
 
@@ -119,9 +111,74 @@ window.onload = function(){
                 }
             },
             error : function () {
-                alert("服务器异常");
+                layer_alert('服务器异常', "error");
             },
         });
     });
+    /**                  弹出层                                  **/
+
+    function layer_alert(msg, type) {
+        if (type == "success") {
+            layer.alert(msg, {
+                icon : 1
+            });
+            return;
+        }
+        if (type == "error") {
+            layer.alert(msg, {
+                icon : 2
+            });
+            return;
+        }
+        if (type == "ask") {
+            layer.alert(msg, {
+                icon : 3
+            });
+            return;
+        }
+        if (type == "warn") {
+            layer.alert(msg, {
+                icon : 7
+            });
+            return;
+        }
+    }
+
+    function layer_post(data) {
+        if (data.code === 0) {
+            layer.alert(data.message, {
+                icon : 1
+            });
+            return;
+        }
+        if (data.code === 1 || data.code === 999) {
+            layer.alert(data.message, {
+                icon : 2
+            });
+            return;
+        }
+        if (data.code === 2) {
+            layer.alert(data.message, {
+                icon : 7
+            });
+            return;
+        }
+        if (data.code === 3) {
+            layer.alert(data.message, {
+                icon : 7
+            });
+            return;
+        }
+    }
+
+    function appLoading() {
+        return layer.load(1, {
+            shade : false
+        });
+    }
+
+    function clearLoading(index) {
+        layer.close(index);
+    }
 
 }

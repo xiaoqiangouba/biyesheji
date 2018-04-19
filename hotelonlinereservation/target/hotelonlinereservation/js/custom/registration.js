@@ -2,23 +2,17 @@ window.onload = function(){
     //点击QQ
     $("#img_qq").click(function(){
         //弹出模态框
-        $("#exampleModal").modal({
-            backdrop:"static"
-        });
+        layer_alert('该功能尚未开通', "warn");
     });
     //点击微信
     $("#img_weixin").click(function(){
         //弹出模态框
-        $("#exampleModal").modal({
-            backdrop:"static"
-        });
+        layer_alert('该功能尚未开通', "warn");
     });
     //点击新浪
     $("#img_xinlang").click(function(){
         //弹出模态框
-        $("#exampleModal").modal({
-            backdrop:"static"
-        });
+        layer_alert('该功能尚未开通', "warn");
     });
 
     //检查用户名是否存在
@@ -52,7 +46,7 @@ window.onload = function(){
                     }
                 },
                 error : function () {
-                    alert("数据库未启动");
+                    layer_alert('服务器异常', "error");
                 },
             });
         };
@@ -164,7 +158,7 @@ window.onload = function(){
                     }
                 },
                 error : function () {
-                    alert("邮箱验证错误");
+                    layer_alert('邮箱验证错误', "error");
                 }
             });
 
@@ -236,7 +230,7 @@ window.onload = function(){
                             yan=data;
                         },
                         error: function (data) {
-                            alert("错误");
+                            layer_alert('网络未连接', "error");
                         },
                     });
                     time();
@@ -313,9 +307,74 @@ window.onload = function(){
                     }
                 },
                 error:function () {
-                    alert("服务器未开启");
+                    layer_alert('服务器异常', "error");
                 },
             });
     });
+    /**                  弹出层                                  **/
+
+    function layer_alert(msg, type) {
+        if (type == "success") {
+            layer.alert(msg, {
+                icon : 1
+            });
+            return;
+        }
+        if (type == "error") {
+            layer.alert(msg, {
+                icon : 2
+            });
+            return;
+        }
+        if (type == "ask") {
+            layer.alert(msg, {
+                icon : 3
+            });
+            return;
+        }
+        if (type == "warn") {
+            layer.alert(msg, {
+                icon : 7
+            });
+            return;
+        }
+    }
+
+    function layer_post(data) {
+        if (data.code === 0) {
+            layer.alert(data.message, {
+                icon : 1
+            });
+            return;
+        }
+        if (data.code === 1 || data.code === 999) {
+            layer.alert(data.message, {
+                icon : 2
+            });
+            return;
+        }
+        if (data.code === 2) {
+            layer.alert(data.message, {
+                icon : 7
+            });
+            return;
+        }
+        if (data.code === 3) {
+            layer.alert(data.message, {
+                icon : 7
+            });
+            return;
+        }
+    }
+
+    function appLoading() {
+        return layer.load(1, {
+            shade : false
+        });
+    }
+
+    function clearLoading(index) {
+        layer.close(index);
+    }
 
 }

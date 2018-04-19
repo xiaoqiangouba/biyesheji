@@ -46,4 +46,11 @@ public interface OrderService {
      * @return
      */
     public List<Order> selectOne(String username);
+
+    /**
+     * 根据房间号查询状态
+     * @param number
+     * @return
+     */
+    public Order selectOrderByNmuber(String number);
 }

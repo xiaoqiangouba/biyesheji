@@ -48,14 +48,14 @@ window.onload=function () {
           success:function (data) {
               if(data==1){
                   $("#addComment").modal("hide");
-                   alert("评论成功");
+                  layer_alert('评论成功', "success");
                   selectRoom(userid,currentPage,sta);
               }else{
-                  alert("联系管理员");
+                  layer_alert('评论失败联系管理员', "error");
               }
           },
           error:function () {
-              alert("网络异常");
+              layer_alert('网络异常', "error");
           },
       });
 
@@ -85,7 +85,7 @@ window.onload=function () {
                 selectRoom(id,1,sta);
             },
             error: function () {
-                alert("服务器异常");
+                layer_alert('服务器异常', "error");
             },
         });
     }
@@ -101,15 +101,15 @@ window.onload=function () {
                 type: "DELETE",
                 success: function (data) {
                     if(data==0){
-                        alert("删除成功");
+                        layer_alert('删除成功', "success");
                         selectRoom(user, currentPage,sta);
                     }else{
-                        alert("删除失败");
+                        layer_alert('删除失败联系管理员', "error");
                     }
 
                 },
                 error: function () {
-                    alert("联系管理员");
+                    layer_alert('联系管理员', "error");
                 },
             });
         }
@@ -146,15 +146,13 @@ window.onload=function () {
                    }
                    if(data.extend.comments.state==1){
 
-                       $("#pinglun").modal({
-                           backdrop:"static"
-                       });
+                       layer_alert('您已经给改评论点赞了', "warn");
 
                        return;
                    }
            },
            error:function () {
-               alert("联系管理员");
+               layer_alert('联系管理员', "error");
            },
        });
     });
@@ -186,16 +184,6 @@ window.onload=function () {
         });
 
     });
-
-   /* //查询订单时间
-    $("#in_time").change(function () {
-        var time= $.trim($("#in_time").val());
-        if(time!=""){
-            $("#select_order").attr("disabled",false);
-        }else {
-            $("#select_order").attr("disabled","disabled");
-        }
-    });*/
 
    //重置
     $("#chongzhi").click(function () {
@@ -251,7 +239,7 @@ window.onload=function () {
                 baobiao(order);
             },
             error:function () {
-                alert("错误");
+                layer_alert('查询错误联系管理员', "error");
             },
         });
     }
@@ -408,7 +396,7 @@ window.onload=function () {
                 baobiao(order);
             },
             error:function () {
-                alert("错误");
+                layer_alert('查询错误联系管理员', "error");
             },
         });
     }
@@ -555,12 +543,12 @@ window.onload=function () {
                 dataType:"json",
                 success:function (data) {
                     if(data==1){
-                        alert("退订成功");
+                        layer_alert('房间退订成功', "success");
                         selectAll(1);
                     }
                 },
                 error:function () {
-                    alert("退订错误");
+                    layer_alert('退订失败联系管理员', "error");
                 },
             });
         }
@@ -578,12 +566,12 @@ window.onload=function () {
                 dataType:"json",
                 success:function (data) {
                     if(data==1){
-                        alert("退订成功");
+                        layer_alert('房间退订成功', "success");
                         selectOrder(userid,1);
                     }
                 },
                 error:function () {
-                    alert("退订错误");
+                    layer_alert('退订失败联系管理员', "error");
                 },
             });
         }
@@ -647,13 +635,13 @@ window.onload=function () {
             data:{"start_Time":start_time,"end_Time":end_time,"userid":userid,"totalPrice":total_price,"roomnumber":roomnumber,"path":path,"pn":currentPage},
             success:function (data) {
                if(data==1){
-                    alert("预订成功");
+                   layer_alert('房间预定成功', "success");
                    $("#addorder").modal("hide");
                    selectRoom(userid,currentPage,sta);
                }
             },
             error:function () {
-                alert("错误");
+                layer_alert('预定失败联系管理员', "error");
             },
         });
     });
@@ -671,7 +659,7 @@ window.onload=function () {
                 $("#img_input").attr("src",room.path);
             },
             error:function () {
-                alert("获取失败");
+                layer_alert('获取失败', "error");
             },
         });
     }
@@ -697,7 +685,7 @@ window.onload=function () {
                build_pag_nav(id,room);
             },
             error:function () {
-                alert("联系管理员");
+                layer_alert('联系管理员', "error");
             },
         });
     }
@@ -925,6 +913,71 @@ window.onload=function () {
 
     function formate(d){
         return d>9?d:'0'+d;
+    }
+    /**                  弹出层                                  **/
+
+    function layer_alert(msg, type) {
+        if (type == "success") {
+            layer.alert(msg, {
+                icon : 1
+            });
+            return;
+        }
+        if (type == "error") {
+            layer.alert(msg, {
+                icon : 2
+            });
+            return;
+        }
+        if (type == "ask") {
+            layer.alert(msg, {
+                icon : 3
+            });
+            return;
+        }
+        if (type == "warn") {
+            layer.alert(msg, {
+                icon : 7
+            });
+            return;
+        }
+    }
+
+    function layer_post(data) {
+        if (data.code === 0) {
+            layer.alert(data.message, {
+                icon : 1
+            });
+            return;
+        }
+        if (data.code === 1 || data.code === 999) {
+            layer.alert(data.message, {
+                icon : 2
+            });
+            return;
+        }
+        if (data.code === 2) {
+            layer.alert(data.message, {
+                icon : 7
+            });
+            return;
+        }
+        if (data.code === 3) {
+            layer.alert(data.message, {
+                icon : 7
+            });
+            return;
+        }
+    }
+
+    function appLoading() {
+        return layer.load(1, {
+            shade : false
+        });
+    }
+
+    function clearLoading(index) {
+        layer.close(index);
     }
 
 

@@ -62,8 +62,24 @@ public class MangementServiceImpl implements MangementService{
         Iterator<String> it = set.iterator();
         while(it.hasNext()){
             String keyStr = it.next();
+            System.out.println("--房间信息缓存--------------------------"+keyStr+"--------------------");
             jedis.del(keyStr);
         }
+        Set<String> indexRoom= jedis.keys( "indexRoom*");
+        Iterator<String> itt = indexRoom.iterator();
+        while(itt.hasNext()){
+            String keyStr = itt.next();
+            System.out.println("--首页缓存--------------------------"+keyStr+"--------------------");
+            jedis.del(keyStr);
+        }
+        Set<String> room_com = jedis.keys( "room_com*");
+        Iterator<String> room_com_t = room_com.iterator();
+        while(room_com_t.hasNext()){
+            String keyStr = room_com_t.next();
+            System.out.println("--房间和评论缓存---------------------------"+keyStr+"--------------------");
+            jedis.del(keyStr);
+        }
+
         jedis.close();
 
     }
@@ -83,8 +99,24 @@ public class MangementServiceImpl implements MangementService{
         Iterator<String> it = set.iterator();
         while(it.hasNext()){
             String keyStr = it.next();
+            System.out.println("--房间信息缓存--------------------------"+keyStr+"--------------------");
             jedis.del(keyStr);
         }
+        Set<String> indexRoom= jedis.keys( "indexRoom*");
+        Iterator<String> itt = indexRoom.iterator();
+        while(itt.hasNext()){
+            String keyStr = itt.next();
+            System.out.println("--首页缓存--------------------------"+keyStr+"--------------------");
+            jedis.del(keyStr);
+        }
+        Set<String> room_com = jedis.keys( "room_com*");
+        Iterator<String> room_com_t = room_com.iterator();
+        while(room_com_t.hasNext()){
+            String keyStr = room_com_t.next();
+            System.out.println("--房间和评论缓存---------------------------"+keyStr+"--------------------");
+            jedis.del(keyStr);
+        }
+
         jedis.close();
         return  n;
     }
@@ -113,8 +145,24 @@ public class MangementServiceImpl implements MangementService{
         Iterator<String> it = set.iterator();
         while(it.hasNext()){
             String keyStr = it.next();
+            System.out.println("--房间信息缓存--------------------------"+keyStr+"--------------------");
             jedis.del(keyStr);
         }
+        Set<String> indexRoom= jedis.keys( "indexRoom*");
+        Iterator<String> itt = indexRoom.iterator();
+        while(itt.hasNext()){
+            String keyStr = itt.next();
+            System.out.println("--首页缓存--------------------------"+keyStr+"--------------------");
+            jedis.del(keyStr);
+        }
+        Set<String> room_com = jedis.keys( "room_com*");
+        Iterator<String> room_com_t = room_com.iterator();
+        while(room_com_t.hasNext()){
+            String keyStr = room_com_t.next();
+            System.out.println("--房间和评论缓存---------------------------"+keyStr+"--------------------");
+            jedis.del(keyStr);
+        }
+
         jedis.close();
         return roomMapper.updateByPrimaryKey(room);
     }

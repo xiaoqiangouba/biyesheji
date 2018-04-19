@@ -189,7 +189,7 @@ window.onload = function(){
                 }
             },
             error: function () {
-                alert("错误");
+                layer_alert('获取失败服务器异常', "error");
             },
         });
     };
@@ -368,9 +368,76 @@ window.onload = function(){
                 });
             },
             error: function () {
-                alert("服务器异常");
+                layer_alert('服务器异常', "error");
             },
         });
     };
+
+    /**                  弹出层                                  **/
+
+    function layer_alert(msg, type) {
+        if (type == "success") {
+            layer.alert(msg, {
+                icon : 1
+            });
+            return;
+        }
+        if (type == "error") {
+            layer.alert(msg, {
+                icon : 2
+            });
+            return;
+        }
+        if (type == "ask") {
+            layer.alert(msg, {
+                icon : 3
+            });
+            return;
+        }
+        if (type == "warn") {
+            layer.alert(msg, {
+                icon : 7
+            });
+            return;
+        }
+    }
+
+    function layer_post(data) {
+        if (data.code === 0) {
+            layer.alert(data.message, {
+                icon : 1
+            });
+            return;
+        }
+        if (data.code === 1 || data.code === 999) {
+            layer.alert(data.message, {
+                icon : 2
+            });
+            return;
+        }
+        if (data.code === 2) {
+            layer.alert(data.message, {
+                icon : 7
+            });
+            return;
+        }
+        if (data.code === 3) {
+            layer.alert(data.message, {
+                icon : 7
+            });
+            return;
+        }
+    }
+
+    function appLoading() {
+        return layer.load(1, {
+            shade : false
+        });
+    }
+
+    function clearLoading(index) {
+        layer.close(index);
+    }
+
 };
 

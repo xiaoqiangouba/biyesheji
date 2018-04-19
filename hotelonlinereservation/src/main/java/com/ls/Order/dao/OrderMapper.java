@@ -23,6 +23,9 @@ public interface OrderMapper {
     //查看个人钱
     List<Order> selectOne(String username);
 
+    //根据房间号查询状态
+    Order selectOrderByNmuber(String number);
+
     List<Order> selectByExample(OrderExample example);
 
     List<Order> selectOrderByuserName(String name);
